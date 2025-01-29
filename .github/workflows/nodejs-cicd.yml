@@ -1,0 +1,26 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: 
+      - "prod"  # Trigger on push to 'prod' branch
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [18.x]  # Node.js version to use
+
+    steps:
+    - uses: actions/checkout@v3  # Checkout the repo
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'  # Cache npm dependencies
+    - run: npm ci  # Install dependencies
+    - run: |
+        touch .env
+        echo "${{secrets.PROD_ENV_FILE}}" > .env  # Add secret ENV variables
