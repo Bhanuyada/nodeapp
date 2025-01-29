@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]  # Node.js version to use
+        node-version: [16.x]  # Node.js version to use
 
     steps:
     - uses: actions/checkout@v3  # Checkout the repo
