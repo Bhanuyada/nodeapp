@@ -3,7 +3,7 @@ name: Node.js CI/CD
 on:
   push:
     branches: 
-      - "prod"  # Trigger on push to 'prod' branch
+      - "main"  # Trigger on push to 'main' branch
 
 jobs:
   build:
@@ -24,3 +24,4 @@ jobs:
     - run: |
         touch .env
         echo "${{secrets.PROD_ENV_FILE}}" > .env  # Add secret ENV variables
+
