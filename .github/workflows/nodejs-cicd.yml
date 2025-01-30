@@ -1,88 +1,28 @@
-name: Node.js CI/CD Pipeline
+name: Node.js CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: 
+      - "main"  # Trigger on push to 'main' branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [16.x]  # Node.js version to use
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci  # More reliable than npm install
-
-      - name: Run tests
-        run: npm test
-
-      - name: Deploy to Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: "147.93.19.61"  # Replace with actual IP or use GitHub Secret
-          username: "root"  # Replace with your SSH user
-          key: ${{ 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}}
-          script: |
-            cd nodeapp  # Update this to the correct path
-            git pull origin main
-            npm ci
-            touch .env
-            echo "${{ secrets.PROD_ENV_FILE }}" > .env
-            pm2 restart myapp  # Replace with your actual PM2 process name
+    - uses: actions/checkout@v3  # Checkout the repo
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'  # Cache npm dependencies
+    - run: npm ci  # Install dependencies
+    - run: |
+        touch .env
+        echo "${{secrets.PROD_ENV_FILE}}" > .env  # Add secret ENV variables
 
 
