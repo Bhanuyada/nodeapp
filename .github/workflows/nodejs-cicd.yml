@@ -78,7 +78,7 @@ Hz09UUh8mTV5PObDrkFbpKgyId3bL3fCZg/Nbmh9NpT8tUzaGNKMJ3cwQsXrVe0FNSpHBX
 4Ml4JscBUfLqgo7J6fkfHZLsA3BhlMfpu3NtoU6+xOLpj1rKtFhNr4CHYJlUDrt6lDVDOk
 TNBjHnuDQi6BAAAAFTI4YmhhbnUyMDAzQGdtYWlsLmNvbQECAwQF}}
           script: |
-            cd /var/www/my-node-app  # Update this to the correct path
+            cd nodeapp  # Update this to the correct path
             git pull origin main
             npm ci
             touch .env
